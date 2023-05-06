@@ -58,7 +58,7 @@ const Posts = ({ selectedId }) => {
   }, [selectedId]);
   return (
     <>
-      {datas.error && <h1>Error 404...</h1>}
+      {datas.error && <h1>Users not Found 404...</h1>}
       {datas.loading && <Spinner>Loading...</Spinner>}
       {datas.filtered && (
         <>
@@ -85,5 +85,4 @@ const Posts = ({ selectedId }) => {
     </>
   );
 };
-
 export default Posts;

@@ -20,7 +20,7 @@ const Posts = ({ selectedId }) => {
       posts: undefined,
     }));
     axios
-      .get("https://jsonplaceholder.typicode.com/postss")
+      .get("https://jsonplaceholder.typicode.com/posts")
       .then(({ data }) => {
         setDatas((oldData) => ({
           ...oldData,

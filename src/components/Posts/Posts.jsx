@@ -20,7 +20,7 @@ const Posts = ({ selectedId }) => {
       posts: undefined,
     }));
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("https://jsonplaceholder.typicode.com/postss")
       .then(({ data }) => {
         setDatas((oldData) => ({
           ...oldData,
@@ -47,20 +47,22 @@ const Posts = ({ selectedId }) => {
         filtered: [...datas.posts],
       }));
     } else {
-      const filteredPosts = datas.posts.filter(
+      const filteredPosts = datas?.posts?.filter(
         ({ userId }) => userId == selectedId
       );
-      setDatas((oldData) => ({
-        ...oldData,
-        filtered: [...filteredPosts],
-      }));
+      if (filteredPosts) {
+        setDatas((oldData) => ({
+          ...oldData,
+          filtered: [...filteredPosts],
+        }));
+      }
     }
   }, [selectedId]);
   return (
     <>
-      {datas.error && <h1>Users not Found 404...</h1>}
-      {datas.loading && <Spinner>Loading...</Spinner>}
-      {datas.filtered && (
+      {datas?.error && <h1>Users not Found 404...</h1>}
+      {datas?.loading && <Spinner>Loading...</Spinner>}
+      {datas?.filtered && (
         <>
           <Table hover>
             <thead>

@@ -42,7 +42,6 @@ const Users = ({ handleSelect }) => {
       {users.loading && <Spinner>Loading...</Spinner>}
       {users.data && (
         <>
-          {" "}
           <Form>
             <FormGroup>
               <Label for="exampleSelect">Users</Label>

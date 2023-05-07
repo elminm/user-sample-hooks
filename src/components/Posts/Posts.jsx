@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Spinner, Table } from "reactstrap";
 
-const Posts = ({ selectedId }) => {
+const Posts = ({ selectedId, value }) => {
   const [datas, setDatas] = useState({
     posts: [],
     filtered: [],
@@ -47,7 +47,7 @@ const Posts = ({ selectedId }) => {
         filtered: [...datas.posts],
       }));
     } else {
-      const filteredPosts = datas?.posts?.filter(
+      const filteredPosts = datas.posts?.filter(
         ({ userId }) => userId == selectedId
       );
       if (filteredPosts) {
@@ -58,6 +58,8 @@ const Posts = ({ selectedId }) => {
       }
     }
   }, [selectedId]);
+
+  useEffect(() => {}, [value]);
   return (
     <>
       {datas?.error && <h1>Users not Found 404...</h1>}
@@ -73,13 +75,19 @@ const Posts = ({ selectedId }) => {
               </tr>
             </thead>
             <tbody>
-              {datas.filtered?.map(({ id, title, body }) => (
-                <tr key={id}>
-                  <th scope="row">{id}</th>
-                  <td>{title}</td>
-                  <td>{body}</td>
-                </tr>
-              ))}
+              {datas.filtered
+                ?.filter(
+                  (item) =>
+                    item.title.toLowerCase().includes(value.toLowerCase()) ||
+                    item.body.toLowerCase().includes(value.toLowerCase())
+                )
+                .map(({ id, title, body }) => (
+                  <tr key={id}>
+                    <th scope="row">{id}</th>
+                    <td>{title}</td>
+                    <td>{body}</td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </>
